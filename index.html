@@ -6,18 +6,19 @@
   <meta name="theme-color" content="#4d96ff">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Birthday Block Quest</title>
+  <title>Birthday Block Mission</title>
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <main class="app-shell">
-    <section class="game" aria-label="Birthday Block Quest">
+    <section class="game" aria-label="Birthday Block Mission">
       <header class="topbar">
         <div>
           <span>Score</span>
           <strong id="score">0</strong>
+          <div id="scoreStack" class="score-stack" aria-label="Scoreblokke"></div>
         </div>
         <div>
           <span>Spørgsmål</span>
@@ -30,23 +31,24 @@
           <span></span><span></span><span></span>
           <span></span><span></span><span></span>
         </div>
-        <h1>Birthday Block Quest</h1>
+        <h1>Birthday Block Mission</h1>
         <p class="birthday">Tillykke med de 10 år!</p>
-        <p>Byg din score med sjove matematik-klodser.</p>
+        <p>Løs opgaver og byg din score med små matematik-klodser.</p>
         <button id="startBtn" class="primary-btn" type="button">Start spillet</button>
         <button id="installBtn" class="secondary-btn" type="button">Installer på telefon</button>
         <small id="installHint">Tryk her, eller brug Chrome-menuen og vælg Installer app.</small>
       </section>
 
       <section id="quizScreen" class="screen">
-        <p id="questionLabel" class="question-label">Spørgsmål 1 af 10</p>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+        <p id="questionLabel" class="question-label">Mission 1 af 10</p>
         <h2 id="questionText">Hvad er 8 + 4?</h2>
         <div id="answers" class="answers" aria-label="Svarmuligheder"></div>
       </section>
 
       <section id="finalScreen" class="screen">
-        <div class="trophy" aria-hidden="true">10</div>
-        <h2>Du klarede questen!</h2>
+        <div id="finalCake" class="cake-scene" aria-hidden="true"></div>
+        <h2>Du klarede missionen!</h2>
         <p class="birthday">Tillykke med fødselsdagen!</p>
         <p id="finalScore">Du fik 0 point.</p>
         <p>Må din dag være fuld af kage, klodser og gode eventyr.</p>

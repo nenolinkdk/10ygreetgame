@@ -1,6 +1,6 @@
-# Birthday Block Quest
+# Birthday Block Mission
 
-Birthday Block Quest is a very small Android math quiz game written in Kotlin.
+Birthday Block Mission is a very small Android math quiz game written in Kotlin.
 It is made for a 10-year-old child who likes block-building games.
 
 The repository also includes a web/PWA version, like the SteveHit games, so it

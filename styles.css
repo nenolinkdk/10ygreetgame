@@ -61,13 +61,14 @@ button {
   color: white;
 }
 
-.topbar div {
+.topbar > div {
+  min-height: 76px;
   padding: 10px;
   background: rgba(0, 0, 0, 0.16);
   border: 4px solid rgba(255, 255, 255, 0.54);
 }
 
-.topbar span,
+.topbar > div > span,
 #installHint {
   display: block;
   font-size: 13px;
@@ -79,6 +80,61 @@ button {
   margin-top: 2px;
   font-size: 26px;
   line-height: 1;
+}
+
+.score-stack {
+  min-height: 20px;
+  display: flex;
+  align-items: end;
+  gap: 3px;
+  margin-top: 8px;
+}
+
+.score-block {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(31, 36, 48, 0.84);
+  box-shadow: inset 3px 3px rgba(255, 255, 255, 0.32);
+}
+
+.score-block.sand {
+  background: #e7d58b;
+}
+
+.score-block.dirt {
+  background: #8b5a2b;
+}
+
+.score-block.grass {
+  background: linear-gradient(#4caf50 0 35%, #7a4f2a 35%);
+}
+
+.score-block.wood {
+  background: #b98244;
+}
+
+.score-block.stone {
+  background: #858b90;
+}
+
+.score-block.coal {
+  background: #383d43;
+}
+
+.score-block.iron {
+  background: #d7dde2;
+}
+
+.score-block.gold {
+  background: #f4c430;
+}
+
+.score-block.emerald {
+  background: #20c56b;
+}
+
+.score-block.diamond {
+  background: #62e7ff;
 }
 
 .screen {
@@ -138,7 +194,7 @@ p {
 }
 
 .block-logo span,
-.trophy {
+.cake-scene {
   width: 48px;
   aspect-ratio: 1;
   border: 5px solid var(--line);
@@ -201,23 +257,101 @@ p {
 .answers {
   width: 100%;
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 104px));
   gap: 14px;
-  justify-items: center;
+  justify-content: center;
 }
 
 .answers button {
+  width: 104px;
+  min-height: 88px;
+  padding-inline: 8px;
   font-size: 30px;
 }
 
-.trophy {
+.feedback {
+  min-height: 96px;
   display: grid;
   place-items: center;
-  width: 104px;
-  color: var(--ink);
-  background: var(--yellow);
-  border-radius: 0;
-  font-size: 44px;
-  font-weight: 1000;
+}
+
+.feedback svg {
+  width: 86px;
+  height: 86px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 5px 0 rgba(31, 36, 48, 0.28));
+}
+
+.feedback.good svg {
+  animation: pop 0.42s ease-out;
+}
+
+.feedback.bad svg {
+  animation: wobble 0.42s ease-out;
+}
+
+.cake-scene {
+  display: grid;
+  place-items: center;
+  width: min(100%, 260px);
+  border: 0;
+  box-shadow: none;
+}
+
+.cake-scene svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.flame {
+  transform-origin: center;
+  animation: candle-flicker 0.55s infinite alternate ease-in-out;
+}
+
+.flame:nth-of-type(2n) {
+  animation-delay: 0.18s;
+}
+
+@keyframes candle-flicker {
+  from {
+    transform: scaleY(0.86) translateY(4px);
+    opacity: 0.82;
+  }
+
+  to {
+    transform: scaleY(1.08) translateY(-2px);
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.7);
+  }
+
+  70% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+
+  25% {
+    transform: rotate(-8deg);
+  }
+
+  75% {
+    transform: rotate(8deg);
+  }
 }
 
 @media (max-height: 620px) {
@@ -228,5 +362,9 @@ p {
 
   p {
     font-size: 18px;
+  }
+
+  .answers button {
+    min-height: 72px;
   }
 }

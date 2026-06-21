@@ -1,6 +1,6 @@
 {
-  "name": "Birthday Block Quest",
-  "short_name": "Block Quest",
+  "name": "Birthday Block Mission",
+  "short_name": "Block Mission",
   "description": "Et simpelt dansk matematikspil med fødselsdag og farverige klodser.",
   "start_url": "./index.html",
   "id": "./index.html",
