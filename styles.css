@@ -69,10 +69,15 @@ button {
 }
 
 .topbar > div > span,
-#installHint {
+#installHint,
+.version-tag {
   display: block;
   font-size: 13px;
   font-weight: 700;
+}
+
+.version-tag {
+  color: rgba(31, 36, 48, 0.72);
 }
 
 .topbar strong {
