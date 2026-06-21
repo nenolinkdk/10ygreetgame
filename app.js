@@ -142,16 +142,19 @@
   });
 
   installBtn.addEventListener("click", async () => {
-    if (!deferredInstallPrompt) return;
+    if (!deferredInstallPrompt) {
+      installHint.textContent = "Hvis boksen ikke åbner: tryk på de tre prikker i Chrome og vælg Installer app eller Føj til startskærm.";
+      return;
+    }
     deferredInstallPrompt.prompt();
     await deferredInstallPrompt.userChoice;
     deferredInstallPrompt = null;
-    installBtn.hidden = true;
+    installHint.textContent = "Hvis appen ikke kom på skærmen: åbn Chrome-menuen og vælg Installer app.";
   });
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js");
+      navigator.serviceWorker.register("./sw.js").then((registration) => registration.update());
     });
   }
 
