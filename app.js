@@ -16,6 +16,9 @@
   const scoreStack = document.getElementById("scoreStack");
   const startBtn = document.getElementById("startBtn");
   const againBtn = document.getElementById("againBtn");
+  const homeBtn = document.getElementById("homeBtn");
+  const restartBtn = document.getElementById("restartBtn");
+  const finalHomeBtn = document.getElementById("finalHomeBtn");
   const installBtn = document.getElementById("installBtn");
   const installHint = document.getElementById("installHint");
 
@@ -31,6 +34,25 @@
   function showScreen(screen) {
     [startScreen, quizScreen, finalScreen].forEach((item) => item.classList.remove("active"));
     screen.classList.add("active");
+    const isStart = screen === startScreen;
+    homeBtn.hidden = isStart;
+    restartBtn.hidden = isStart;
+  }
+
+  function resetToStart() {
+    if (nextQuestionTimer) {
+      clearTimeout(nextQuestionTimer);
+      nextQuestionTimer = null;
+    }
+    score = 0;
+    questionNumber = 0;
+    currentQuestion = null;
+    answerLocked = false;
+    answersEl.replaceChildren();
+    feedbackEl.replaceChildren();
+    finalCake.replaceChildren();
+    updateScore();
+    showScreen(startScreen);
   }
 
   function startGame() {
@@ -314,6 +336,10 @@
 
   startBtn.addEventListener("click", startGame);
   againBtn.addEventListener("click", startGame);
+  restartBtn.addEventListener("click", startGame);
+  homeBtn.addEventListener("click", resetToStart);
+  finalHomeBtn.addEventListener("click", resetToStart);
   updateInstallUi();
   updateScore();
+  showScreen(startScreen);
 })();

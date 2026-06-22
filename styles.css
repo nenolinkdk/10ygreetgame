@@ -91,19 +91,88 @@ button {
   min-height: 100dvh;
   display: grid;
   grid-template-rows: auto 1fr;
-  background: rgba(255, 248, 219, 0.94);
+  background:
+    linear-gradient(180deg, rgba(116, 200, 255, 0.98) 0 42%, rgba(116, 200, 255, 0.08) 42%),
+    rgba(255, 248, 219, 0.94);
   border-inline: 6px solid var(--line);
   box-shadow: 0 20px 60px rgba(31, 36, 48, 0.28);
+  overflow: hidden;
+}
+
+.game::before {
+  content: "";
+  position: absolute;
+  inset: 82px 0 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0 5%, #6b4423 5% 10%, transparent 10% 22%, #5b371c 22% 27%, transparent 27% 68%, #6b4423 68% 73%, transparent 73%),
+    linear-gradient(90deg, transparent 0 1%, #1f8f3b 1% 18%, transparent 18% 23%, #2fa345 23% 42%, transparent 42% 62%, #1f8f3b 62% 84%, transparent 84%),
+    linear-gradient(90deg, transparent 0 9%, #2f8f3b 9% 20%, transparent 20% 29%, #3aa851 29% 39%, transparent 39% 66%, #2f8f3b 66% 77%, transparent 77%),
+    radial-gradient(circle at 82% 14%, #ffe066 0 31px, #f6b43b 32px 40px, transparent 41px),
+    linear-gradient(180deg, transparent 0 47%, #55b64b 47% 54%, #8a5a2b 54% 100%),
+    repeating-linear-gradient(0deg, transparent 0 37px, rgba(31, 36, 48, 0.16) 37px 42px),
+    repeating-linear-gradient(90deg, transparent 0 37px, rgba(31, 36, 48, 0.16) 37px 42px);
+  background-size:
+    100% 34%,
+    100% 22%,
+    100% 18%,
+    100% 100%,
+    100% 100%,
+    42px 42px,
+    42px 42px;
+  background-position:
+    0 28%,
+    0 16%,
+    0 33%,
+    0 0,
+    0 0,
+    0 54%,
+    0 54%;
+  background-repeat: repeat-x, repeat-x, repeat-x, no-repeat, no-repeat, repeat, repeat;
+}
+
+.game::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  z-index: 0;
+  height: 70px;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, #7a4f2a 0 42px, #8b5a2b 42px 84px),
+    repeating-linear-gradient(0deg, transparent 0 37px, rgba(31, 36, 48, 0.18) 37px 42px),
+    repeating-linear-gradient(90deg, transparent 0 37px, rgba(31, 36, 48, 0.18) 37px 42px);
+  border: 5px solid rgba(31, 36, 48, 0.4);
+  box-shadow: 0 -42px 0 #4caf50;
 }
 
 .topbar {
+  position: relative;
+  z-index: 2;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 52px;
   gap: 10px;
   padding: max(12px, env(safe-area-inset-top)) 12px 12px;
   background: var(--blue);
   border-bottom: 6px solid var(--line);
   color: white;
+}
+
+.game-nav {
+  display: grid;
+  gap: 8px;
+}
+
+.game-nav button {
+  min-height: 34px;
+  color: white;
+  background: rgba(31, 36, 48, 0.34);
+  border: 3px solid rgba(255, 255, 255, 0.54);
+  font-size: 20px;
+  font-weight: 900;
 }
 
 .topbar > div {
@@ -188,6 +257,8 @@ button {
 }
 
 .screen {
+  position: relative;
+  z-index: 1;
   display: none;
   align-content: center;
   justify-items: center;
@@ -195,6 +266,9 @@ button {
   min-height: 0;
   padding: 28px 20px;
   text-align: center;
+  background: rgba(255, 248, 219, 0.82);
+  margin: 14px;
+  border: 5px solid rgba(31, 36, 48, 0.22);
 }
 
 .screen.active {
@@ -290,6 +364,18 @@ p {
   box-shadow: 0 6px 0 var(--line);
   font-size: 22px;
   font-weight: 900;
+}
+
+.final-actions {
+  width: min(100%, 390px);
+  display: grid;
+  gap: 14px;
+  justify-items: stretch;
+}
+
+.big-play-btn {
+  min-height: 72px;
+  font-size: 26px;
 }
 
 .secondary-btn {
@@ -408,6 +494,7 @@ p {
   .screen {
     gap: 12px;
     padding-block: 18px;
+    margin: 8px;
   }
 
   p {

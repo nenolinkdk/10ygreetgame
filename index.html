@@ -24,6 +24,10 @@
           <span>Spørgsmål</span>
           <strong id="progress">0/10</strong>
         </div>
+        <nav class="game-nav" aria-label="Navigation">
+          <button id="homeBtn" type="button" title="Til start">⌂</button>
+          <button id="restartBtn" type="button" title="Start forfra">↻</button>
+        </nav>
       </header>
 
       <section id="startScreen" class="screen active">
@@ -37,7 +41,7 @@
         <button id="startBtn" class="primary-btn" type="button">Start spillet</button>
         <button id="installBtn" class="secondary-btn" type="button">Installer på telefon</button>
         <small id="installHint">Tryk her, eller brug Chrome-menuen og vælg Installer app.</small>
-        <small class="version-tag">Version 5 - Kristian</small>
+        <small class="version-tag">Version 6 - Kristian</small>
       </section>
 
       <section id="quizScreen" class="screen">
@@ -53,7 +57,10 @@
         <p class="birthday">Tillykke med fødselsdagen!</p>
         <p id="finalScore">Du fik 0 point.</p>
         <p>Må din dag være fuld af kage, klodser og gode eventyr.</p>
-        <button id="againBtn" class="primary-btn" type="button">Spil igen</button>
+        <div class="final-actions">
+          <button id="againBtn" class="primary-btn big-play-btn" type="button">Spil igen</button>
+          <button id="finalHomeBtn" class="secondary-btn" type="button">Til start</button>
+        </div>
       </section>
     </section>
   </main>
