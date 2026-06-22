@@ -1,4 +1,4 @@
-const CACHE_NAME = "birthday-block-mission-v4";
+const CACHE_NAME = "birthday-block-mission-v5";
 const ASSETS = [
   "./",
   "./index.html",

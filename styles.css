@@ -33,22 +33,67 @@ button {
 }
 
 .app-shell {
+  position: relative;
+  isolation: isolate;
   min-height: 100dvh;
   display: grid;
   place-items: center;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   background:
-    linear-gradient(180deg, rgba(139, 211, 255, 0.86), rgba(199, 249, 204, 0.9)),
-    repeating-linear-gradient(90deg, #8bd3ff 0 34px, #fff3b0 34px 68px);
+    linear-gradient(180deg, #74c8ff 0 46%, #7cc95d 46% 57%, #8b5a2b 57% 100%);
+  overflow: hidden;
+}
+
+.app-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, transparent 0 8%, #6b4423 8% 11%, transparent 11% 30%, #5a391e 30% 34%, transparent 34% 70%, #6b4423 70% 74%, transparent 74%),
+    linear-gradient(90deg, transparent 0 2%, #2f8f3b 2% 17%, transparent 17% 25%, #2f8f3b 25% 39%, transparent 39% 64%, #2f8f3b 64% 82%, transparent 82%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.14) 0 38px, transparent 38px 76px),
+    repeating-linear-gradient(0deg, transparent 0 38px, rgba(31, 36, 48, 0.1) 38px 42px),
+    repeating-linear-gradient(90deg, transparent 0 38px, rgba(31, 36, 48, 0.1) 38px 42px);
+  background-size:
+    100% 32%,
+    100% 24%,
+    84px 84px,
+    42px 42px,
+    42px 42px;
+  background-position:
+    0 38%,
+    0 27%,
+    0 58%,
+    0 57%,
+    0 57%;
+  background-repeat: repeat-x, repeat-x, repeat, repeat, repeat;
+}
+
+.app-shell::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  height: 38%;
+  background:
+    repeating-linear-gradient(90deg, rgba(55, 127, 43, 0.95) 0 42px, rgba(76, 175, 80, 0.95) 42px 84px),
+    repeating-linear-gradient(0deg, transparent 0 38px, rgba(31, 36, 48, 0.15) 38px 42px),
+    repeating-linear-gradient(90deg, transparent 0 38px, rgba(31, 36, 48, 0.15) 38px 42px);
+  border-top: 6px solid rgba(31, 36, 48, 0.36);
 }
 
 .game {
+  position: relative;
   width: min(100vw, 520px);
   min-height: 100dvh;
   display: grid;
   grid-template-rows: auto 1fr;
-  background: var(--paper);
+  background: rgba(255, 248, 219, 0.94);
   border-inline: 6px solid var(--line);
+  box-shadow: 0 20px 60px rgba(31, 36, 48, 0.28);
 }
 
 .topbar {

@@ -24,6 +24,7 @@
   let currentQuestion = null;
   let operationDeck = [];
   let answerLocked = false;
+  let nextQuestionTimer = null;
   let deferredInstallPrompt = null;
   const scoreMaterials = ["sand", "dirt", "grass", "wood", "stone", "coal", "iron", "gold", "emerald", "diamond"];
 
@@ -33,11 +34,18 @@
   }
 
   function startGame() {
+    if (nextQuestionTimer) {
+      clearTimeout(nextQuestionTimer);
+      nextQuestionTimer = null;
+    }
     score = 0;
     questionNumber = 0;
+    currentQuestion = null;
+    answerLocked = false;
     operationDeck = shuffle(["add", "add", "add", "sub", "sub", "sub", "mul", "mul", "mul", "div"]);
     feedbackEl.innerHTML = steveSvg();
     feedbackEl.className = "feedback good";
+    finalCake.replaceChildren();
     updateScore();
     nextQuestion();
   }
@@ -91,10 +99,14 @@
 
     updateScore();
     showFeedback(isCorrect);
-    setTimeout(nextQuestion, 780);
+    nextQuestionTimer = setTimeout(() => {
+      nextQuestionTimer = null;
+      nextQuestion();
+    }, 780);
   }
 
   function showFinal() {
+    answerLocked = true;
     finalScore.textContent = `Du fik ${score} point ud af ${totalQuestions * 10}.`;
     finalCake.innerHTML = cakeSvg();
     progressEl.textContent = `${totalQuestions}/${totalQuestions}`;
@@ -250,9 +262,27 @@
   window.addEventListener("beforeinstallprompt", (event) => {
     event.preventDefault();
     deferredInstallPrompt = event;
-    installBtn.hidden = false;
-    installHint.textContent = "Tryk Installer for at lægge spillet på telefonen.";
+    if (!isInstalledApp()) {
+      installBtn.hidden = false;
+      installHint.hidden = false;
+      installHint.textContent = "Tryk Installer for at lægge spillet på telefonen.";
+    }
   });
+
+  function isInstalledApp() {
+    return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  }
+
+  function updateInstallUi() {
+    if (isInstalledApp()) {
+      installBtn.hidden = true;
+      installHint.hidden = true;
+      return;
+    }
+
+    installBtn.hidden = false;
+    installHint.hidden = false;
+  }
 
   installBtn.addEventListener("click", async () => {
     if (!deferredInstallPrompt) {
@@ -263,6 +293,12 @@
     await deferredInstallPrompt.userChoice;
     deferredInstallPrompt = null;
     installHint.textContent = "Hvis appen ikke kom på skærmen: åbn Chrome-menuen og vælg Installer app.";
+  });
+
+  window.addEventListener("appinstalled", () => {
+    installBtn.hidden = true;
+    installHint.hidden = true;
+    deferredInstallPrompt = null;
   });
 
   if ("serviceWorker" in navigator) {
@@ -278,5 +314,6 @@
 
   startBtn.addEventListener("click", startGame);
   againBtn.addEventListener("click", startGame);
+  updateInstallUi();
   updateScore();
 })();
